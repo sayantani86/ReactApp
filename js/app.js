@@ -1,5 +1,3 @@
-'use strict';
-
 // For any third party dependencies, like jQuery, place them in the lib folder.
 
 requirejs.config({
@@ -12,9 +10,24 @@ requirejs.config({
 
 require(['react', 'react-dom'], function (React, ReactDOM) {
 
-	ReactDOM.render(React.createElement(
+	const element = React.createElement(
 		'h1',
-		null,
-		'Hello, world!'
-	), document.getElementById('wrapper'));
+		{ className: 'greeting' },
+		'Hello, AAAAAAAAAAAAAA!'
+	);
+
+	var Application = React.createClass({
+		displayName: 'Application',
+
+
+		render: function () {
+			return React.createElement(
+				'div',
+				{ className: 'test' },
+				element
+			);
+		}
+	});
+
+	ReactDOM.render(React.createElement(Application, null), document.getElementById('wrapper'));
 });

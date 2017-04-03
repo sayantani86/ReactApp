@@ -1,17 +1,18 @@
-'use strict';
 
 define(['react'], function (React) {
 
+	const element = React.createElement(
+		"h1",
+		{ className: "greeting" },
+		"Hello, AAAAAAAAAAAAAA!"
+	);
+
 	var App = React.createClass({
-		displayName: 'App',
+		displayName: "App",
 
 
-		render: function render() {
-			return React.createElement(
-				'div',
-				null,
-				'Hello World'
-			);
+		render: function () {
+			return element;
 		}
 	});
 	return App;

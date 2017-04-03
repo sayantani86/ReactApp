@@ -10,21 +10,8 @@ requirejs.config({
 
 require(['react', 'react-dom'], function(React, ReactDOM) {
 
-    const element = (
-  		<h1 className="greeting">
-    		Hello, AAAAAAAAAAAAAA!
-  		</h1>
-	);
-
-    var Application = React.createClass({
-		
-		render : function () {
-			return (<div className='test'>{element}</div>);
-		}
-	});
-
     ReactDOM.render(
-			<Application />,
+			<h1>Hello, Sayantani!</h1>,
 			document.getElementById('wrapper')
 	);
 	
