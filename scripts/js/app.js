@@ -18,7 +18,7 @@ requirejs.config({
   }
 });
 
-require(['react', 'react-dom', 'app/application'], function (React, ReactDOM, App) {
+require(['react', 'react-dom'], function (React, ReactDOM) {
 
   var user = {
     firstName: 'Sayantani',
@@ -29,49 +29,98 @@ require(['react', 'react-dom', 'app/application'], function (React, ReactDOM, Ap
     return user.firstName + ' ' + user.lastName;
   }
 
-  var element = React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'h1',
-      { className: 'greeting' },
-      'Hello ',
-      formatName(user),
-      '!'
-    ),
-    React.createElement(
-      'h2',
-      null,
-      new Date().toLocaleTimeString()
-    )
-  );
-
-  var HelloMessage = function (_React$Component) {
-    _inherits(HelloMessage, _React$Component);
-
-    function HelloMessage() {
-      _classCallCheck(this, HelloMessage);
-
-      return _possibleConstructorReturn(this, (HelloMessage.__proto__ || Object.getPrototypeOf(HelloMessage)).apply(this, arguments));
-    }
-
-    _createClass(HelloMessage, [{
-      key: 'render',
-      value: function render() {
-        return React.createElement(
-          'div',
-          null,
-          element
-        );
-      }
-    }]);
-
-    return HelloMessage;
-  }(React.Component);
-
   function display() {
+
+    var element = React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'h1',
+        { className: 'greeting' },
+        'Hello ',
+        formatName(user),
+        '!'
+      ),
+      React.createElement(
+        'h2',
+        null,
+        new Date().toLocaleTimeString()
+      )
+    );
+
+    var HelloMessage = function (_React$Component) {
+      _inherits(HelloMessage, _React$Component);
+
+      function HelloMessage() {
+        _classCallCheck(this, HelloMessage);
+
+        return _possibleConstructorReturn(this, (HelloMessage.__proto__ || Object.getPrototypeOf(HelloMessage)).apply(this, arguments));
+      }
+
+      _createClass(HelloMessage, [{
+        key: 'render',
+        value: function render() {
+          return React.createElement(
+            'div',
+            null,
+            element
+          );
+        }
+      }]);
+
+      return HelloMessage;
+    }(React.Component);
+
     ReactDOM.render(React.createElement(HelloMessage, null), document.getElementById('wrapper'));
   }
 
-  display();
+  function tick() {
+    var element = React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'h1',
+        { className: 'greeting' },
+        'Hello ',
+        formatName(user),
+        '!'
+      ),
+      React.createElement(
+        'h2',
+        null,
+        'It is ',
+        new Date().toLocaleTimeString(),
+        '.'
+      )
+    );
+
+    var HelloMessage = function (_React$Component2) {
+      _inherits(HelloMessage, _React$Component2);
+
+      function HelloMessage() {
+        _classCallCheck(this, HelloMessage);
+
+        return _possibleConstructorReturn(this, (HelloMessage.__proto__ || Object.getPrototypeOf(HelloMessage)).apply(this, arguments));
+      }
+
+      _createClass(HelloMessage, [{
+        key: 'render',
+        value: function render() {
+          return React.createElement(
+            'div',
+            null,
+            element
+          );
+        }
+      }]);
+
+      return HelloMessage;
+    }(React.Component);
+
+    ReactDOM.render(React.createElement(HelloMessage, null), document.getElementById('wrapper'));
+  }
+
+  //setInterval(tick, 1000);
+
+  setInterval(display, 1000);
 });
