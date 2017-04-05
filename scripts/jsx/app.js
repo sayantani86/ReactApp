@@ -20,9 +20,12 @@ function formatName(user) {
 }
 
 const element = (
+  <div>
   	<h1 className="greeting">
     		Hello {formatName(user)}!
   	</h1>
+    <h2>{new Date().toLocaleTimeString()}</h2>
+  </div>
 );
 
 class HelloMessage extends React.Component {
@@ -31,10 +34,13 @@ class HelloMessage extends React.Component {
   	};
 }
 
-ReactDOM.render(
-		<HelloMessage />,
-		document.getElementById('wrapper')
-);
-	
+function display(){
+  ReactDOM.render(
+    <HelloMessage />,
+    document.getElementById('wrapper')
+  );
+}
+
+display()
 
 });

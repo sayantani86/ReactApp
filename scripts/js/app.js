@@ -30,11 +30,20 @@ require(['react', 'react-dom', 'app/application'], function (React, ReactDOM, Ap
   }
 
   var element = React.createElement(
-    'h1',
-    { className: 'greeting' },
-    'Hello ',
-    formatName(user),
-    '!'
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      { className: 'greeting' },
+      'Hello ',
+      formatName(user),
+      '!'
+    ),
+    React.createElement(
+      'h2',
+      null,
+      new Date().toLocaleTimeString()
+    )
   );
 
   var HelloMessage = function (_React$Component) {
@@ -60,5 +69,9 @@ require(['react', 'react-dom', 'app/application'], function (React, ReactDOM, Ap
     return HelloMessage;
   }(React.Component);
 
-  ReactDOM.render(React.createElement(HelloMessage, null), document.getElementById('wrapper'));
+  function display() {
+    ReactDOM.render(React.createElement(HelloMessage, null), document.getElementById('wrapper'));
+  }
+
+  display();
 });
