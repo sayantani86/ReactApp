@@ -48,79 +48,52 @@ require(['react', 'react-dom'], function (React, ReactDOM) {
       )
     );
 
-    var HelloMessage = function (_React$Component) {
-      _inherits(HelloMessage, _React$Component);
+    var Clock = function (_React$Component) {
+      _inherits(Clock, _React$Component);
 
-      function HelloMessage() {
-        _classCallCheck(this, HelloMessage);
+      function Clock() {
+        _classCallCheck(this, Clock);
 
-        return _possibleConstructorReturn(this, (HelloMessage.__proto__ || Object.getPrototypeOf(HelloMessage)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (Clock.__proto__ || Object.getPrototypeOf(Clock)).apply(this, arguments));
       }
 
-      _createClass(HelloMessage, [{
+      _createClass(Clock, [{
         key: 'render',
         value: function render() {
           return React.createElement(
             'div',
             null,
-            element
+            React.createElement(
+              'h1',
+              { className: 'greeting' },
+              'Hello ',
+              formatName(this.props.data.user),
+              '!'
+            ),
+            React.createElement(
+              'h2',
+              null,
+              this.props.data.date
+            )
           );
         }
       }]);
 
-      return HelloMessage;
+      return Clock;
     }(React.Component);
 
-    ReactDOM.render(React.createElement(HelloMessage, null), document.getElementById('wrapper'));
-  }
-
-  function tick() {
-    var element = React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'h1',
-        { className: 'greeting' },
-        'Hello ',
-        formatName(user),
-        '!'
-      ),
-      React.createElement(
-        'h2',
-        null,
-        'It is ',
-        new Date().toLocaleTimeString(),
-        '.'
-      )
-    );
-
-    var HelloMessage = function (_React$Component2) {
-      _inherits(HelloMessage, _React$Component2);
-
-      function HelloMessage() {
-        _classCallCheck(this, HelloMessage);
-
-        return _possibleConstructorReturn(this, (HelloMessage.__proto__ || Object.getPrototypeOf(HelloMessage)).apply(this, arguments));
+    var data = {
+      date: new Date().toLocaleTimeString(),
+      user: {
+        firstName: 'Punki',
+        lastName: 'Dasgupta'
       }
+    };
 
-      _createClass(HelloMessage, [{
-        key: 'render',
-        value: function render() {
-          return React.createElement(
-            'div',
-            null,
-            element
-          );
-        }
-      }]);
+    var element1 = React.createElement(Clock, { data: data });
 
-      return HelloMessage;
-    }(React.Component);
-
-    ReactDOM.render(React.createElement(HelloMessage, null), document.getElementById('wrapper'));
+    ReactDOM.render(element1, document.getElementById('wrapper'));
   }
-
-  //setInterval(tick, 1000);
 
   setInterval(display, 1000);
 });

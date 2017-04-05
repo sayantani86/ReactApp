@@ -30,14 +30,31 @@ function display(){
     </div>
   );
 
-  class HelloMessage extends React.Component {
+  class Clock extends React.Component {
     render() {
-        return <div>{element}</div>;
+        return (
+          <div>
+              <h1 className="greeting">
+                  Hello {formatName(this.props.data.user)}!
+              </h1>
+              <h2>{this.props.data.date}</h2>
+          </div>
+        );
     };
   }
 
+  var data = {
+    date: new Date().toLocaleTimeString(),
+    user: {
+      firstName: 'Punki',
+      lastName: 'Dasgupta'
+    }
+  }
+
+  const element1 = <Clock data={data} />;
+
   ReactDOM.render(
-    <HelloMessage />,
+    element1,
     document.getElementById('wrapper')
   );
 }
