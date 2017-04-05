@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "babel components/ -d js/"
+    "build": "babel scripts/jsx/ -d scripts/js/"
   },
   "author": "sayantani",
   "license": "ISC",
