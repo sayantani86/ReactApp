@@ -51,13 +51,37 @@ require(['react', 'react-dom'], function (React, ReactDOM) {
     var Clock = function (_React$Component) {
       _inherits(Clock, _React$Component);
 
-      function Clock() {
+      function Clock(props) {
         _classCallCheck(this, Clock);
 
-        return _possibleConstructorReturn(this, (Clock.__proto__ || Object.getPrototypeOf(Clock)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Clock.__proto__ || Object.getPrototypeOf(Clock)).call(this, props));
+
+        _this.state = { date: new Date().toLocaleTimeString() };
+        return _this;
       }
 
       _createClass(Clock, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+          var _this2 = this;
+
+          this.timerID = setInterval(function () {
+            return _this2.tick();
+          }, 1000);
+        }
+      }, {
+        key: 'tick',
+        value: function tick() {
+          this.setState({
+            date: new Date().toLocaleTimeString()
+          });
+        }
+      }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+          clearInterval(this.timerID);
+        }
+      }, {
         key: 'render',
         value: function render() {
           return React.createElement(
@@ -73,7 +97,7 @@ require(['react', 'react-dom'], function (React, ReactDOM) {
             React.createElement(
               'h2',
               null,
-              this.props.data.date
+              this.state.date
             )
           );
         }
@@ -83,7 +107,6 @@ require(['react', 'react-dom'], function (React, ReactDOM) {
     }(React.Component);
 
     var data = {
-      date: new Date().toLocaleTimeString(),
       user: {
         firstName: 'Punki',
         lastName: 'Dasgupta'
