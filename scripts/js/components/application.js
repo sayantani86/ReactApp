@@ -14,29 +14,57 @@ define(['react'], function (React) {
 		return user.firstName + ' ' + user.lastName;
 	}
 
-	var Button = function (_React$Component) {
-		_inherits(Button, _React$Component);
+	var UserPanel = function (_React$Component) {
+		_inherits(UserPanel, _React$Component);
+
+		function UserPanel() {
+			_classCallCheck(this, UserPanel);
+
+			return _possibleConstructorReturn(this, (UserPanel.__proto__ || Object.getPrototypeOf(UserPanel)).apply(this, arguments));
+		}
+
+		_createClass(UserPanel, [{
+			key: 'render',
+			value: function render() {
+				return React.createElement(
+					'div',
+					{ className: 'col-md-4' },
+					React.createElement(
+						'h4',
+						{ className: 'greeting' },
+						'Welcome ',
+						formatName(this.props.user),
+						'!'
+					)
+				);
+			}
+		}]);
+
+		return UserPanel;
+	}(React.Component);
+
+	var Button = function (_React$Component2) {
+		_inherits(Button, _React$Component2);
 
 		function Button(props) {
 			_classCallCheck(this, Button);
 
-			var _this = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
+			var _this2 = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
 
-			_this.state = { isToggleOn: true };
-			_this.buttonText = _this.state.isToggleOn ? 'Show Clock' : 'Hide Clock';
-			_this.handleClick = _this.handleClick.bind(_this);
-			return _this;
+			_this2.state = { isToggleOn: true };
+			_this2.handleClick = _this2.handleClick.bind(_this2);
+			return _this2;
 		}
 
 		_createClass(Button, [{
 			key: 'handleClick',
-			value: function handleClick() {
+			value: function handleClick(e) {
+				e.preventDefault();
 				this.setState(function (prevState) {
 					return {
 						isToggleOn: !prevState.isToggleOn
 					};
 				});
-				this.buttonText = this.state.isToggleOn ? 'Show Clock' : 'Hide Clock';
 			}
 		}, {
 			key: 'render',
@@ -47,7 +75,7 @@ define(['react'], function (React) {
 					React.createElement(
 						'button',
 						{ type: 'button', className: 'btn btn-primary', onClick: this.handleClick },
-						this.buttonText
+						this.state.isToggleOn ? 'Show Clock' : 'Hide Clock'
 					)
 				);
 			}
@@ -55,56 +83,6 @@ define(['react'], function (React) {
 
 		return Button;
 	}(React.Component);
-
-	var UserInfo = function (_React$Component2) {
-		_inherits(UserInfo, _React$Component2);
-
-		function UserInfo() {
-			_classCallCheck(this, UserInfo);
-
-			return _possibleConstructorReturn(this, (UserInfo.__proto__ || Object.getPrototypeOf(UserInfo)).apply(this, arguments));
-		}
-
-		_createClass(UserInfo, [{
-			key: 'render',
-			value: function render() {
-				return React.createElement(
-					'div',
-					{ className: 'row' },
-					React.createElement(
-						'div',
-						{ className: 'col-md-8' },
-						React.createElement(
-							'h4',
-							{ className: 'greeting' },
-							'Welcome ',
-							formatName(this.props.user),
-							'!'
-						)
-					),
-					React.createElement(
-						'div',
-						{ className: 'col-md-4' },
-						React.createElement(Button, null)
-					)
-				);
-			}
-		}]);
-
-		return UserInfo;
-	}(React.Component);
-
-	var App = React.createClass({
-		displayName: 'App',
-
-		render: function render() {
-			return React.createElement(
-				'div',
-				{ className: 'container' },
-				React.createElement(UserInfo, { user: this.props.data.user })
-			);
-		}
-	});
 
 	var Clock = function (_React$Component3) {
 		_inherits(Clock, _React$Component3);
@@ -135,12 +113,6 @@ define(['react'], function (React) {
 				});
 			}
 		}, {
-			key: 'handleClick',
-			value: function handleClick(e) {
-				e.preventDefault();
-				console.log('clicked');
-			}
-		}, {
 			key: 'componentWillUnmount',
 			value: function componentWillUnmount() {
 				clearInterval(this.timerID);
@@ -150,18 +122,11 @@ define(['react'], function (React) {
 			value: function render() {
 				return React.createElement(
 					'div',
-					{ className: 'container' },
-					React.createElement(UserInfo, { user: this.props.data.user }),
+					null,
 					React.createElement(
-						'h2',
+						'h4',
 						null,
 						this.state.date
-					),
-					React.createElement(Button, { buttonText: 'Change Message' }),
-					React.createElement(
-						'a',
-						{ href: '#', onClick: this.handleClick },
-						'Click Me'
 					)
 				);
 			}
@@ -169,6 +134,109 @@ define(['react'], function (React) {
 
 		return Clock;
 	}(React.Component);
+
+	var DatePanel = function (_React$Component4) {
+		_inherits(DatePanel, _React$Component4);
+
+		function DatePanel(props) {
+			_classCallCheck(this, DatePanel);
+
+			var _this5 = _possibleConstructorReturn(this, (DatePanel.__proto__ || Object.getPrototypeOf(DatePanel)).call(this, props));
+
+			_this5.state = { showClock: true, isToggleOn: true };
+			_this5.handleClick = _this5.handleClick.bind(_this5);
+			return _this5;
+		}
+
+		_createClass(DatePanel, [{
+			key: 'handleClick',
+			value: function handleClick(e) {
+				e.preventDefault();
+				this.setState(function (prevState) {
+					return {
+						isToggleOn: !prevState.isToggleOn,
+						showClock: !prevState.showClock
+					};
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return React.createElement(
+					'div',
+					{ className: 'col-md-8' },
+					React.createElement(
+						'div',
+						{ className: 'row' },
+						React.createElement(
+							'div',
+							{ className: 'col-md-4' },
+							React.createElement(
+								'button',
+								{ type: 'button', className: 'btn btn-primary', onClick: this.handleClick },
+								this.state.isToggleOn ? 'Show Clock' : 'Hide Clock'
+							)
+						),
+						React.createElement(
+							'div',
+							{ className: 'col-md-4' },
+							this.state.showClock ? React.createElement(Clock, null) : 'Hide Clock'
+						)
+					)
+				);
+			}
+		}]);
+
+		return DatePanel;
+	}(React.Component);
+
+	var Header = function (_React$Component5) {
+		_inherits(Header, _React$Component5);
+
+		function Header() {
+			_classCallCheck(this, Header);
+
+			return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+		}
+
+		_createClass(Header, [{
+			key: 'render',
+			value: function render() {
+				return React.createElement(
+					'div',
+					null,
+					React.createElement(UserPanel, { user: this.props.data.user }),
+					React.createElement(DatePanel, null)
+				);
+			}
+		}]);
+
+		return Header;
+	}(React.Component);
+
+	var Content = function (_React$Component6) {
+		_inherits(Content, _React$Component6);
+
+		function Content() {
+			_classCallCheck(this, Content);
+
+			return _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).apply(this, arguments));
+		}
+
+		return Content;
+	}(React.Component);
+
+	var App = React.createClass({
+		displayName: 'App',
+
+		render: function render() {
+			return React.createElement(
+				'div',
+				{ className: 'container' },
+				React.createElement(Header, { data: data })
+			);
+		}
+	});
 
 	var data = {
 		user: {
